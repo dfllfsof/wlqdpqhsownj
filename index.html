@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI와 함께 성장하는 디자인과: 올바른 활용을 위한 첫걸음</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif; /* 기본 폰트를 Pretendard로 가정, 실제 사용 시 Google Fonts 등에서 로드 필요 */
+            background-color: #F4F7F9;
+            color: #263238;
+        }
+        /* Pretendard 폰트 CDN 예시 (실제 사용 시 필요에 따라 추가)
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        */
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+        }
+        h1, h2, h3 {
+            color: #2A62B6; /* Primary Blue */
+        }
+        .text-primary { color: #2A62B6; }
+        .text-secondary { color: #4ECDC4; }
+        .text-accent { color: #A9A9A9; }
+        .bg-primary { background-color: #2A62B6; }
+        .bg-secondary { background-color: #4ECDC4; }
+        .bg-light-blue { background-color: #E0F2FE; }
+
+        /* Chart.js 툴팁 커스텀 (필요 시 추가 스타일링) */
+        .chartjs-tooltip {
+            opacity: 1;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 3px;
+            padding: 0.5rem;
+            pointer-events: none;
+            transition: all .1s ease;
+            transform: translate(-50%, 0);
+        }
+
+        .chartjs-tooltip-key {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+        }
+        /* 해라체 적용을 위한 일반 텍스트 스타일 */
+        p, li, span {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-primary text-white py-8 px-4 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold">AI와 함께 성장하는 디자인과: 올바른 활용을 위한 첫걸음</h1>
+        <p class="mt-2 text-lg">미림마이스터고 디자인과 학생 AI 인식 및 활용도 조사 보고서</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="introduction" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">1. 조사 동기와 목적</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-2 text-secondary">조사 동기</h3>
+                <p>최근 인공지능(AI) 기술은 빠르게 발전하며 다양한 분야에서 활용되고 있다. 학생들 사이에서도 AI 도구를 활용하는 사례가 늘고 있지만, AI 기술을 단순한 편리함으로만 인식하거나 무분별하게 사용하는 경우도 증가하고 있다. 이러한 상황에서 학생들이 AI에 대해 어떻게 생각하고 있으며, 실제로 어떻게 활용하고 있는지를 파악하는 것은 매우 중요하다.</p>
+                <h3 class="text-xl font-semibold mt-4 mb-2 text-secondary">조사 목적</h3>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>다른 학생들이 AI를 어떻게 사용하는지 구체적인 사례를 제시하여 다양한 활용 방법을 소개한다.</li>
+                    <li>AI에 대한 부정확하거나 단편적인 인식을 바로잡고, 기술에 대한 균형 잡힌 시각을 갖도록 돕는다.</li>
+                    <li>AI를 효과적이면서도 책임 있게 사용할 수 있는 올바른 활용법을 제안하여, 기술의 남용을 방지하고 긍정적인 방향으로 활용될 수 있도록 유도한다.</li>
+                </ul>
+                <p class="mt-3">디자인과 학생들은 창의적인 사고와 시각적 표현 능력을 필요로 하는 만큼, AI를 어떻게 활용하느냐에 따라 학습과 표현의 폭이 크게 달라질 수 있다. 이 보고서는 AI와 함께 살아가는 시대 속에서, 디자인과 학생들이 기술을 자신의 성장과 학습에 유익하게 활용할 수 있도록 도움을 주고자 한다.</p>
+            </div>
+        </section>
+
+        <section id="methodology" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">2. 조사 계획</h2>
+            <div class="card">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-secondary">조사 기간</h3>
+                        <p>2025년 5월 16일 ~ 5월 20일 (총 5일간)</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-secondary">조사 대상</h3>
+                        <p>미림마이스터고 디자인과 1학년 5반 학생 18명 전원 (보고서 내용 기반, 설문 응답은 19명 기준)</p>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-secondary">조사 방법</h3>
+                <div class="space-y-3">
+                    <div class="p-4 border border-gray-200 rounded-md bg-light-blue">
+                        <h4 class="font-bold text-primary">설문조사</h4>
+                        <p>Google Forms를 활용하여 객관식 문항 2개, 주관식 문항 1개로 구성했다.</p>
+                    </div>
+                    <div class="p-4 border border-gray-200 rounded-md bg-light-blue">
+                        <h4 class="font-bold text-primary">인터뷰</h4>
+                        <p>AI에 대한 학생들의 생각을 보조자료로 활용했다. 공통질문 2가지와 개인화된 질문 1~3가지를 활용했다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="results" class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">3. 조사 결과</h2>
+
+            <h3 class="text-xl font-bold mb-4 ml-2 text-secondary">가. 설문 조사 결과</h3>
+            <p class="mb-6 ml-2">미림 마이스터고 디자인과 1학년 5반 학생들은 AI의 도움을 대체로 긍정적으로 생각하고 있다. (매우 도움 9명, 도움 8명, 보통 2명)</p>
+
+            <div class="card mb-8">
+                <h4 class="text-lg font-semibold mb-1 text-center">AI가 가장 많은 도움을 준다고 생각하는 영역은 무엇입니까?</h4>
+                <p class="text-sm text-gray-600 mb-3 text-center">총 응답자 수: 19명</p>
+                <div class="chart-container w-full max-w-xl mx-auto h-80 md:h-96 lg:h-[450px]">
+                    <canvas id="surveyChart1"></canvas>
+                </div>
+                <div class="mt-4 px-2">
+                    <h5 class="font-semibold text-primary">주요 결과:</h5>
+                    <p>가장 많은 선택을 받은 항목은 '학습(정보 검색, 번역, 요약 등)'으로, 전체의 약 47.4% (9명)가 선택했다. 이는 AI의 주요 활용 용도가 지식 습득 및 학습 지원임을 보여준다.</p>
+                    <h5 class="font-semibold text-primary mt-2">그 외 주요 선택 항목:</h5>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>정보 검색 및 정리: 26.3% (5명)</li>
+                        <li>엔터테인먼트 및 취미: 15.8% (3명)</li>
+                        <li>소통 및 관계 / 디자인·창작 활동: 각각 5.3% (1명)</li>
+                    </ul>
+                    <h5 class="font-semibold text-primary mt-2">주요 시사점:</h5>
+                    <p>다수의 응답자가 AI를 실용적인 학습 도구로 활용하고 있으며, 창작, 소통 등 감성·창의적 분야보다는 정보 활용 및 학습 중심의 기능이 주로 사용되고 있음을 알 수 있다.</p>
+                </div>
+            </div>
+
+            <div class="card mb-8">
+                <h4 class="text-lg font-semibold mb-1 text-center">학교생활이나 일상생활에서 AI가 현재 얼마나 도움이 되고 있다고 생각하나요?</h4>
+                <p class="text-sm text-gray-600 mb-3 text-center">(1 = 전혀 도움이 되지 않는다 ~ 5 = 매우 도움이 된다) | 총 응답자 수: 19명</p>
+                <div class="chart-container w-full max-w-xl mx-auto h-72 md:h-80 lg:h-96">
+                    <canvas id="surveyChart2"></canvas>
+                </div>
+                 <div class="mt-4 px-2">
+                    <h5 class="font-semibold text-primary">주요 결과:</h5>
+                    <p>'5점(매우 도움이 된다)'이 47.4%(9명), '4점(도움이 된다)'이 42.1%(8명)로, 긍정 응답 비율이 89.5%로 매우 높게 나타났다.</p>
+                    <h5 class="font-semibold text-primary mt-2">중립/부정 응답:</h5>
+                     <ul class="list-disc list-inside ml-4">
+                        <li>3점 (보통이다): 10.5% (2명)</li>
+                        <li>1~2점 (도움 안됨/전혀 도움 안됨): 0% (0명)</li>
+                    </ul>
+                    <h5 class="font-semibold text-primary mt-2">주요 시사점:</h5>
+                    <p>대부분의 응답자들이 AI가 학교나 일상생활에 실질적으로 도움을 주고 있다고 인식하고 있으며, AI 기술이 실생활 속 유용한 도구로 자리잡고 있다는 점을 확인할 수 있다.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4 class="text-lg font-semibold mb-1 text-center">AI 사용 시 발생 가능한 문제점(잘못된 정보, 개인정보 노출, 윤리적 문제 등)에 대해 얼마나 걱정하고 있나요?</h4>
+                <p class="text-sm text-gray-600 mb-3 text-center">총 응답자 수: 19명</p>
+                <div class="chart-container w-full max-w-xl mx-auto h-72 md:h-80 lg:h-96">
+                    <canvas id="surveyChart3"></canvas>
+                </div>
+                <div class="mt-4 px-2">
+                    <h5 class="font-semibold text-primary">주요 결과:</h5>
+                    <p>'걱정되는 편이다'가 47.4%(9명)로 가장 많았으며, '매우 걱정된다'(10.5%, 2명)를 포함하여 총 57.9%가 AI 사용 시 문제 발생 가능성에 대해 걱정하고 있었다.</p>
+                    <h5 class="font-semibold text-primary mt-2">중립/걱정되지 않음 응답:</h5>
+                     <ul class="list-disc list-inside ml-4">
+                        <li>보통이다: 21.1% (4명)</li>
+                        <li>별로 걱정되지 않는다: 10.5% (2명)</li>
+                        <li>전혀 걱정되지 않는다: 10.5% (2명)</li>
+                    </ul>
+                    <h5 class="font-semibold text-primary mt-2">주요 시사점:</h5>
+                    <p>다수의 응답자들이 AI 기술 사용에 따른 부작용이나 위험 요소에 대해 일정 수준 이상의 우려를 갖고 있다. 특히 잘못된 정보, 개인정보 유출, 윤리적 문제 등 신뢰성과 보안 문제에 대한 인식이 존재하며, 향후 AI 활용 확대를 위해서는 안전성과 투명성 확보가 중요함을 시사한다.</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold mt-10 mb-4 ml-2 text-secondary">나. 인터뷰 결과</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h4 class="text-lg font-semibold mb-2 text-primary">인터뷰 1: 1515 진어진 학생</h4>
+                    <p class="italic text-gray-700">"사람이 하지 못하는 기술적인 방면에서 AI가 도움이 될 수 있다고 생각한다."</p>
+                    <p class="mt-2 text-sm text-gray-600">주요 내용: AI의 기술적 보조 역할에 대한 긍정적 인식.</p>
+                </div>
+                <div class="card">
+                    <h4 class="text-lg font-semibold mb-2 text-primary">인터뷰 2: 장은혁 학생</h4>
+                    <p class="italic text-gray-700">"AI를 사용하면서 불편한 점이 없었고 아이디어 제공 측면에서 AI를 유용하게 사용 중."</p>
+                    <p class="mt-2 text-sm text-gray-600">주요 내용: AI 사용의 편의성 및 아이디어 발상 도구로서의 유용성 강조.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">4. 결론</h2>
+            <div class="card">
+                <p>이번 조사를 통해 미림마이스터고 디자인과 학생들은 인공지능(AI)에 대해 대체로 긍정적인 인식을 가지고 있으며, 학습과 창작 과정에서 다양한 방식으로 AI를 적극 활용하고 있다는 사실을 확인했다. 특히 아이디어 발상, 과제 수행, 이미지 생성 등에서 AI는 창의성과 생산성을 높여주는 유용한 도구로 인식되고 있었다.</p>
+                <p class="mt-3">다만 일부 학생들 사이에서는 AI를 단순히 편리한 보조 수단으로만 여기거나, 충분한 정보 없이 무분별하게 사용하는 경우도 나타났으며, 정보의 정확성 부족, 저작권 문제, 윤리적 사용에 대한 인식 부족 등 아직 해결해야 할 과제들도 확인되었다.</p>
+                <p class="mt-3">AI는 디자인과 학생들의 창의적인 활동을 도와주는 강력한 도구가 될 수 있으나, 이를 어떻게 이해하고 활용하느냐에 따라 그 효과와 영향은 달라질 수 있다. 디자인과처럼 창의성과 표현 능력이 중요한 학과일수록, AI는 단순한 편의성 이상의 의미를 가지며, 학생들의 표현력 확장과 학습 효율 향상에 크게 기여할 수 있다. 앞으로도 AI는 더욱 다양한 교육 환경에서 중요한 도구로 자리매김할 것이며, 이를 학생들의 성장과 꿈을 실현하는 데 유익하게 활용하는 자세가 필요할 것이다.</p>
+            </div>
+        </section>
+
+        <section id="references" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">5. 참고 자료</h2>
+            <div class="card">
+                <ul class="list-disc list-inside space-y-1">
+                    <li>설문조사 원본 링크: <a href="https://docs.google.com/forms/d/1ajN_idMHj24eERWT54x-Jhk-9g89c2p7uI4pULk0beU/edit#response=ACYDBNhMAbK2t0pbgwfkTLo4KcZXTb3-AMWBRuMn-JSjWHUgsomGHOayGHO_v6t_v3zgPSs" target="_blank" class="text-blue-600 hover:underline">Google Forms 설문지</a></li>
+                    <li>인터뷰 자료 (클로바노트 링크는 원본 보고서 참조):
+                        <ul class="list-circle list-inside ml-4">
+                            <li>진어진 학생 인터뷰 요약: <span class="text-gray-700">clovanote.naver.com/s/gh8rdcm6vEJdE9XVSydjsmS</span></li>
+                            <li>장은혁 학생 인터뷰 요약: <span class="text-gray-700">clovanote.naver.com/s/qneyjwAcEata8qbJ4d3JwAS</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-gray-800 text-white">
+        <p>&copy; 2025 미림마이스터고등학교 1학년 5반 4조 (강지윤, 김지유, 맹제우, 송예서, 최윤아)</p>
+        <p>보고서 작성일: 2025년 5월 25일</p>
+        <p class="text-sm mt-1">인포그래픽 생성일: 2025년 5월 30일</p>
+    </footer>
+
+    <script>
+        // Chart.js Custom Tooltip
+        const getOrCreateTooltip = (chart) => {
+            let tooltipEl = chart.canvas.parentNode.querySelector('div.chartjs-tooltip');
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+                tooltipEl.classList.add('chartjs-tooltip'); // 사용자 정의 클래스 추가
+                tooltipEl.style.opacity = 1;
+                tooltipEl.style.pointerEvents = 'none';
+                tooltipEl.style.position = 'absolute';
+                tooltipEl.style.transform = 'translate(-50%, 0)';
+                tooltipEl.style.transition = 'all .1s ease';
+
+                const table = document.createElement('table');
+                table.style.margin = '0px';
+
+                tooltipEl.appendChild(table);
+                chart.canvas.parentNode.appendChild(tooltipEl);
+            }
+            return tooltipEl;
+        };
+
+        const externalTooltipHandler = (context) => {
+            const {chart, tooltip} = context;
+            const tooltipEl = getOrCreateTooltip(chart);
+
+            if (tooltip.opacity === 0) {
+                tooltipEl.style.opacity = 0;
+                return;
+            }
+
+            if (tooltip.body) {
+                const titleLines = tooltip.title || [];
+                const bodyLines = tooltip.body.map(b => b.lines);
+
+                const tableHead = document.createElement('thead');
+                titleLines.forEach(title => {
+                    const tr = document.createElement('tr');
+                    tr.style.borderWidth = 0;
+                    const th = document.createElement('th');
+                    th.style.borderWidth = 0;
+                    th.colSpan = 2; // title은 한 셀로
+                    const text = document.createTextNode(title);
+                    th.appendChild(text);
+                    tr.appendChild(th);
+                    tableHead.appendChild(tr);
+                });
+
+                const tableBody = document.createElement('tbody');
+                bodyLines.forEach((body, i) => {
+                    const colors = tooltip.labelColors[i];
+                    const span = document.createElement('span');
+                    span.classList.add('chartjs-tooltip-key'); // 사용자 정의 클래스 추가
+                    span.style.background = colors.backgroundColor;
+                    span.style.borderColor = colors.borderColor;
+                    span.style.borderWidth = '2px';
+                    span.style.marginRight = '10px';
+                    span.style.height = '10px';
+                    span.style.width = '10px';
+                    span.style.display = 'inline-block';
+
+                    const tr = document.createElement('tr');
+                    tr.style.backgroundColor = 'inherit';
+                    tr.style.borderWidth = 0;
+
+                    const td = document.createElement('td');
+                    td.style.borderWidth = 0;
+                    
+                    const text = document.createTextNode(body);
+
+                    td.appendChild(span);
+                    td.appendChild(text);
+                    tr.appendChild(td);
+                    tableBody.appendChild(tr);
+                });
+
+                const tableRoot = tooltipEl.querySelector('table');
+                while (tableRoot.firstChild) {
+                    tableRoot.firstChild.remove();
+                }
+                tableRoot.appendChild(tableHead);
+                tableRoot.appendChild(tableBody);
+            }
+
+            const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
+            tooltipEl.style.opacity = 1;
+            tooltipEl.style.left = positionX + tooltip.caretX + 'px';
+            tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+            tooltipEl.style.font = tooltip.options.bodyFont.string;
+            tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+            tooltipEl.style.backgroundColor = 'rgba(38, 50, 56, 0.8)'; // Dark Text with opacity
+            tooltipEl.style.color = 'white';
+            tooltipEl.style.borderRadius = '4px';
+        };
+
+        // 레이블 줄바꿈 함수
+        function formatLabel(str, maxLen) {
+            const words = str.split(new RegExp(`([\\s\\(\\[\\{\\)\\]\\}\\/])`, 'g')); // 공백 및 괄호, 슬래시 기준으로 분리
+            let currentLine = '';
+            const lines = [];
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                if (word.match(new RegExp(`([\\s\\(\\[\\{\\)\\]\\}\\/])`)) && currentLine.length > 0) { // 분리자이고 현재 줄에 내용이 있으면
+                     if (currentLine.length + word.length > maxLen && lines.length > 0) { // 분리자를 포함해도 넘치면
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                     } else {
+                        currentLine += word;
+                     }
+                } else if (currentLine.length + word.length > maxLen && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine += word;
+                }
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const chartColors = {
+            primary: '#2A62B6',
+            secondary: '#4ECDC4',
+            accent: '#A9A9A9',
+            lightBlue: '#E0F2FE',
+            darkText: '#263238',
+            custom: ['#2A62B6', '#4ECDC4', '#FFB174', '#FF6B6B', '#8A8D9E', '#A0E7E5']
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Survey Chart 1: AI's Most Helpful Areas
+            const ctx1 = document.getElementById('surveyChart1').getContext('2d');
+            const surveyData1 = {
+                labels: [
+                    formatLabel('학습(정보검색,번역,요약 등)', 16),
+                    formatLabel('엔터테인먼트 및 취미(음악 추천, 콘텐츠 제작 아이디어 등)', 16),
+                    formatLabel('소통 및 관계 (예: 자동 응답, 번역을 통한 대화등)', 16),
+                    formatLabel('정보 검색 및 정리 (예: 필요한 정보 찾기, 뉴스요약 등)', 16),
+                    formatLabel('디자인/창작 활동 (예: 이미지 생성, 코드 자동완성 등)', 16)
+                ],
+                datasets: [{
+                    label: '응답 수',
+                    data: [9, 3, 1, 5, 1],
+                    backgroundColor: chartColors.custom,
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            };
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: surveyData1,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 11 },
+                                boxWidth: 15,
+                                padding: 15,
+                                color: chartColors.darkText
+                            }
+                        },
+                        tooltip: {
+                            enabled: false,
+                            external: externalTooltipHandler,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+                                        const percentage = ((context.raw / total) * 100).toFixed(1);
+                                        label += `${context.raw}명 (${percentage}%)`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Survey Chart 2: Perceived Helpfulness of AI
+            const ctx2 = document.getElementById('surveyChart2').getContext('2d');
+            const surveyData2 = {
+                labels: [
+                    formatLabel('보통이다 (3점)', 10),
+                    formatLabel('도움이 된다 (4점)', 10),
+                    formatLabel('매우 도움이 된다 (5점)', 10)
+                ],
+                datasets: [{
+                    label: '응답 수 (명)',
+                    data: [2, 8, 9], // 1,2점 0명이므로 제외 또는 0으로 표시
+                    backgroundColor: [chartColors.accent, chartColors.secondary, chartColors.primary],
+                    borderColor: [chartColors.accent, chartColors.secondary, chartColors.primary],
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }]
+            };
+            new Chart(ctx2, {
+                type: 'bar',
+                data: surveyData2,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // 가로 막대형으로 변경하여 레이블 가독성 확보
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: '응답 수 (명)', color: chartColors.darkText },
+                            ticks: { color: chartColors.darkText }
+                        },
+                        y: {
+                            ticks: { 
+                                color: chartColors.darkText,
+                                font: { size: 11 }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: false,
+                            external: externalTooltipHandler,
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    // 배열 레이블의 경우 join 처리
+                                     return tooltipItems[0].label.split(',').join('');
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) { // 가로 막대이므로 x
+                                        label += context.parsed.x + '명';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Survey Chart 3: Concerns about AI Problems
+            const ctx3 = document.getElementById('surveyChart3').getContext('2d');
+            const surveyData3 = {
+                labels: [
+                    formatLabel('전혀 걱정되지 않는다', 12),
+                    formatLabel('별로 걱정되지 않는다', 12),
+                    formatLabel('보통이다', 12),
+                    formatLabel('걱정되는 편이다', 12),
+                    formatLabel('매우 걱정된다', 12)
+                ],
+                datasets: [{
+                    label: '응답 수 (명)',
+                    data: [2, 2, 4, 9, 2],
+                    backgroundColor: [chartColors.custom[1], chartColors.custom[2], chartColors.accent, chartColors.custom[3], chartColors.custom[0]],
+                    borderColor: [chartColors.custom[1], chartColors.custom[2], chartColors.accent, chartColors.custom[3], chartColors.custom[0]],
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
+                }]
+            };
+            new Chart(ctx3, {
+                type: 'bar',
+                data: surveyData3,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '응답 수 (명)', color: chartColors.darkText },
+                            ticks: { color: chartColors.darkText }
+                        },
+                        x: {
+                            ticks: { 
+                                color: chartColors.darkText,
+                                font: {size: 11}
+                             }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: false,
+                            external: externalTooltipHandler,
+                             callbacks: {
+                                title: function(tooltipItems) {
+                                     return tooltipItems[0].label.split(',').join('');
+                                },
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '명';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    </body>
+</html>
